@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Archive: History & Legacy</title>
+    <style>
+        :root {
+            --sand: #f5e6d3; /* Warm Sand Palette */
+            --dark-red: #8b0000; /* Dark Red Heartbeat */
+        }
+
+        body {
+            background-color: var(--sand);
+            color: var(--dark-red);
+            font-family: 'Georgia', serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        #home {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .hero-img {
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid var(--dark-red);
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .welcome-note {
+            max-width: 600px;
+            font-style: italic;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 60px;
+        }
+
+        .tab-btn {
+            background: var(--dark-red);
+            color: var(--sand);
+            border: none;
+            padding: 12px 25px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        /* --- CONTACT CURATOR BUTTON --- */
+        .contact-btn {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            background: none;
+            border: 1px solid var(--dark-red);
+            color: var(--dark-red);
+            padding: 10px 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Highlight when hovered (Desktop) */
+        .contact-btn:hover {
+            background-color: var(--dark-red);
+            color: var(--sand);
+        }
+
+        /* Highlight when clicked/touched (The Fix) */
+        .contact-btn:active {
+            background-color: var(--dark-red);
+            color: var(--sand);
+            transition: 0s; /* Instant feedback */
+        }
+
+        /* --- MOBILE TWEAKS --- */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.5rem; }
+            .welcome-note { font-size: 1rem; }
+            .tab-btn { width: 100%; max-width: 280px; }
+            
+            .contact-btn {
+                position: static;
+                margin-top: 20px;
+                width: auto;
+            }
+        }
+
+        #pdf-viewer {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        iframe { width: 100%; height: 100%; border: none; }
+
+        .return-btn {
+            position: fixed; top: 10px; right: 10px;
+            background: var(--dark-red); color: var(--sand);
+            border: none; padding: 8px 16px; cursor: pointer;
+            z-index: 100; font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="home">
+        <img src="background.jpg" alt="History and Legacy" class="hero-img">
+        <h1>History or Legacy: Which is Most Important?</h1>
+        <p class="welcome-note">
+            "History is a past @ any point of time. Legacy is a present @ any point of time though extracted values from past."
+        </p>
+        <div class="btn-group">
+            <button class="tab-btn" onclick="openPDF('history-legacy.pdf')">Explore</button>
+            <button class="tab-btn" onclick="openPDF('history-legacy-dialogue.pdf')">A Story</button>
+        </div>
+
+        <button class="contact-btn" onclick="window.location.href='mailto:gskg02@gmail.com?subject=Message for the Curator'">Contact the Curator</button>
+    </div>
+
+    <div id="pdf-viewer">
+        <button class="return-btn" onclick="closePDF()">← Return to Home</button>
+        <iframe id="pdf-frame" src=""></iframe>
+    </div>
+
+    <script>
+        function openPDF(fileName) {
+            document.getElementById('home').style.display = 'none';
+            const viewer = document.getElementById('pdf-viewer');
+            const frame = document.getElementById('pdf-frame');
+            viewer.style.display = 'flex';
+            frame.src = fileName;
+        }
+
+        function closePDF() {
+            document.getElementById('pdf-viewer').style.display = 'none';
+            document.getElementById('home').style.display = 'flex';
+            document.getElementById('pdf-frame').src = "";
+        }
+    </script>
+</body>
+</html>
